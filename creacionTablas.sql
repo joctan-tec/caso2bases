@@ -210,7 +210,6 @@ CREATE TABLE IF NOT EXISTS `Caso2`.`Productos` (
   `idProducto` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(70) NOT NULL,
   `enabled` BIT NOT NULL,
-  `comentario` VARCHAR(500) NULL,
   PRIMARY KEY (`idProducto`))
 ENGINE = InnoDB;
 
@@ -353,6 +352,7 @@ CREATE TABLE IF NOT EXISTS `Caso2`.`ProductosXSolicitudesWeb` (
   `idProducto` SMALLINT UNSIGNED NOT NULL,
   `cantidad` DECIMAL(8,2) NOT NULL,
   `idSolicitudWeb` INT UNSIGNED NOT NULL,
+  `comentario` VARCHAR(500) NULL,
   PRIMARY KEY (`idProducto`, `idSolicitudWeb`),
   INDEX `fk_Productos_has_SolicitudesWeb_Productos1_idx` (`idProducto` ASC) VISIBLE,
   INDEX `fk_ProductosXSolicitudesWeb_SolicitudesWeb1_idx` (`idSolicitudWeb` ASC) VISIBLE,
