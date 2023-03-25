@@ -1,3 +1,6 @@
+use Caso2;
+set @fechaInicial = '2022-01-01 09:00:00';
+
 INSERT INTO Playas (nombre) VALUES
 ('Ocotal'),
 ('Matapalito'),
@@ -356,60 +359,6 @@ insert into Clientes(nombre,apellido,telefono, createdAT) values("Katherine","Sm
 insert into Clientes(nombre,apellido,telefono, createdAT) values("Shamika","Nelson",97816384,"2022-01-03 09:00:00");
 
 
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(1000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(1000.00,@fechaInicial,1,@fechaInicial,1), 256),
-		1);
-
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(1000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(1000.00,@fechaInicial,1,@fechaInicial,2), 256),
-		2);
-
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(2000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2000.00,@fechaInicial,1,@fechaInicial,3), 256),
-		3);
-        
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,4), 256),
-		4);
-        
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,5), 256),
-		5);
-        
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,6), 256),
-		6);
-        
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(2000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,7), 256),
-		7);
-        
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,8), 256),
-		8);
-
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(2000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,9), 256),
-		9);
-
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,10), 256),
-		10);
-        
-INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
-VALUES(1800.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
-		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,11), 256),
-		11);
         
 INSERT INTO turnos (horaInicio, horaFinal) VALUES
 ('08:00:00', '12:00:00'),
@@ -434,7 +383,7 @@ VALUES("Leche en Polvo", 3, 1 ,5670.00, @fechaInicial);
 INSERT INTO Ingredientes(nombre, idUnidadeMedida, enabled, precio, fechaCompra) 
 VALUES("Leche condensada", 3,1,1230.00, @fechaInicial);
 INSERT INTO Ingredientes(nombre, idUnidadeMedida, enabled, precio, fechaCompra) 
-VALUES("Hielo Molido", 4,1,8000.00, @fechaInicial);
+VALUES("Hielo Molido", 3,1,8000.00, @fechaInicial);
 INSERT INTO Ingredientes(nombre, idUnidadeMedida, enabled, precio, fechaCompra) 
 VALUES("Helado", 3,1,20380.20, @fechaInicial);
 INSERT INTO Ingredientes(nombre, idUnidadeMedida, enabled, precio, fechaCompra) 
@@ -500,6 +449,8 @@ INSERT INTO Productos(nombre, enabled) VALUES("Mojito",1);
 INSERT INTO Productos(nombre, enabled) VALUES("Mamadita",1);
 INSERT INTO Productos(nombre, enabled) VALUES("Caipirinha",1);
 INSERT INTO Productos(nombre, enabled) VALUES("Chiliguaro",1);
+
+
 
 INSERT INTO ingredientesxproductos (idingrediente, idproducto, cantidad) values 
 (1, 1, 60);
@@ -605,8 +556,126 @@ INSERT INTO ingredientesxproductos (idingrediente, idproducto, cantidad) values
 INSERT INTO ingredientesxproductos (idingrediente, idproducto, cantidad) values 
 (31, 11, 5);
 
+
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(1000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(1000.00,@fechaInicial,1,@fechaInicial,1), 256),
+		1);
+
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(1000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(1000.00,@fechaInicial,1,@fechaInicial,2), 256),
+		2);
+
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(2000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2000.00,@fechaInicial,1,@fechaInicial,3), 256),
+		3);
+        
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,4), 256),
+		4);
+        
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,5), 256),
+		5);
+        
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,6), 256),
+		6);
+        
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(2000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,7), 256),
+		7);
+        
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,8), 256),
+		8);
+
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(2000.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,9), 256),
+		9);
+
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,10), 256),
+		10);
+        
+INSERT INTO LogPrecios(valor, fechaInicio, active, createdAT, updateAT, checkSum, idProducto)
+VALUES(1800.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
+		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,11), 256),
+		11);
+
 insert into comisioneslogs (porcentaje, enabled, fechaInicio, checkSum) values
 (9.00, 1, '2022-01-01 09:00:00', SHA2(CONCAT(9.00, '2022-01-01 09:00:00', 1 ), 256));
 
+
 insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
-()
+(1,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(1,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(2,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(2,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(3,1,1,'2022-01-01 08:00:00',800.00,0,SHA2(CONCAT(3,1,1,'2022-01-01 08:00:00',800.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(4,1,1,'2022-01-01 08:00:00',397.00,0,SHA2(CONCAT(4,1,1,'2022-01-01 08:00:00',397.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(5,1,1,'2022-01-01 08:00:00',20000.00,0,SHA2(CONCAT(5,1,1,'2022-01-01 08:00:00',20000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(6,1,1,'2022-01-01 08:00:00',5300.00,0,SHA2(CONCAT(6,1,1,'2022-01-01 08:00:00',5300.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(7,1,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(7,1,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(8,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(8,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(9,1,1,'2022-01-01 08:00:00',400.00,0,SHA2(CONCAT(9,1,1,'2022-01-01 08:00:00',400.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(10,1,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(10,1,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(11,1,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(11,1,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(12,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(12,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(13,1,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(13,1,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(14,1,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,1,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(15,1,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,1,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(16,1,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,1,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(17,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(17,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(18,1,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(18,1,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(19,1,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,1,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(20,1,1,'2022-01-01 08:00:00',1.00,0,SHA2(CONCAT(20,1,1,'2022-01-01 08:00:00',1.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(21,1,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,1,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(22,1,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(22,1,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(23,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(23,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(24,1,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(24,1,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(25,1,1,'2022-01-01 08:00:00',970.00,0,SHA2(CONCAT(25,1,1,'2022-01-01 08:00:00',970.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(26,1,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(26,1,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(27,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(27,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(28,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(28,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(29,1,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(29,1,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(30,1,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,1,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idResponsable, fecha, cantidad, tipoOperacion) values
+(31,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+# tipoOperacion ==> 0 = Producto Nuevo | 1 = Venta | 2 = Refill | 3 = Producto Caducado
