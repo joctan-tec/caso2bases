@@ -89,10 +89,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `Caso2`.`CarritosXplayas` (
-  `idCarritoXplaya` INT UNSIGNED NOT NULL,
   `idCarrito` SMALLINT(4) UNSIGNED NOT NULL,
   `idPlaya` SMALLINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`idCarritoXplaya`, `idPlaya`, `idCarrito`),
+  PRIMARY KEY (`idPlaya`, `idCarrito`),
   INDEX `fk_CarritosXplayas_Carrito1_idx` (`idCarrito` ASC) VISIBLE,
   INDEX `fk_CarritosXplayas_Playas1_idx` (`idPlaya` ASC) VISIBLE,
   CONSTRAINT `fk_CarritosXplayas_Carrito1`
@@ -478,20 +477,20 @@ DROP TABLE IF EXISTS `Caso2`.`ReportesXcajas` ;
 CREATE TABLE IF NOT EXISTS `Caso2`.`ReportesXcajas` (
   `idCajaDineroLog` INT UNSIGNED NOT NULL,
   `idReporte` INT UNSIGNED NOT NULL,
-  `idCoperoRecibe` INT UNSIGNED NOT NULL,
+  `idCoperoEntrega` INT UNSIGNED NOT NULL,
   `isAgree` BIT NOT NULL,
   `dinero` DECIMAL(11,2) NOT NULL,
   `checkSum` VARBINARY(150) NOT NULL,
-  PRIMARY KEY (`idCajaDineroLog`, `idReporte`, `idCoperoRecibe`),
+  PRIMARY KEY (`idCajaDineroLog`, `idReporte`, `idCoperoEntrega`),
   INDEX `fk_CajaDineroLogs_has_Reportes_Reportes1_idx` (`idReporte` ASC) VISIBLE,
-  INDEX `fk_ReportesXcajas_Copero1_idx` (`idCoperoRecibe` ASC) VISIBLE,
+  INDEX `fk_ReportesXcajas_Copero1_idx` (`idCoperoEntrega` ASC) VISIBLE,
   CONSTRAINT `fk_CajaDineroLogs_has_Reportes_Reportes1`
     FOREIGN KEY (`idReporte`)
     REFERENCES `Caso2`.`Reportes` (`idReporte`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ReportesXcajas_Copero1`
-    FOREIGN KEY (`idCoperoRecibe`)
+    FOREIGN KEY (`idCoperoEntrega`)
     REFERENCES `Caso2`.`Copero` (`idCopero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -662,6 +661,23 @@ INSERT INTO carrito (color, enabled) VALUES
 ('#FC05AD', 1),
 ('#F55BA1', 1);
 
+insert into CarritosXplayas (idcarrito, idplaya) VALUES
+(1,1),
+(2,1),
+(3,1),
+(4,1),
+(5,1),
+(6,2),
+(7,2),
+(8,2),
+(9,2),
+(10,2),
+(11,3),
+(12,3),
+(13,3),
+(14,3),
+(15,3);
+
 
 insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Jeannine","Spivey",42995444,"709680253","CR84614233647678488716",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Jeannine","Spivey","42995444","709680253","CR84614233647678488716", 0 , "2022-01-01 09:00:00", 0), 256));
 insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Jaime","Mchenry",47161441,"304530517","CR39375877895213729418",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Jaime","Mchenry","47161441","304530517","CR39375877895213729418", 0 , "2022-01-01 09:00:00", 0), 256));
@@ -693,6 +709,23 @@ insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero
 insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Antonio","Sabo",68433302,"207920609","CR63836275771236836730",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Antonio","Sabo","68433302","207920609","CR63836275771236836730", 0 , "2022-01-01 09:00:00", 0), 256));
 insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Rosa","Eckhardt",92765146,"109020442","CR94595171174609018806",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Rosa","Eckhardt","92765146","109020442","CR94595171174609018806", 0 , "2022-01-01 09:00:00", 0), 256));
 insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Erica","Davidson",56705274,"201090984","CR70485167467435513454",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Erica","Davidson","56705274","201090984","CR70485167467435513454", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Anthony","Tidwell",71759496,"305950226","CR51688210519663509717",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Anthony","Tidwell","71759496","305950226","CR51688210519663509717", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Robert","Kifer",14464900,"701090331","CR56624403356326984590",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Robert","Kifer","14464900","701090331","CR56624403356326984590", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Al","Honor",88327591,"409310102","CR39372837867102427776",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Al","Honor","88327591","409310102","CR39372837867102427776", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Eric","Duncanson",79805954,"102140058","CR74073228975331961395",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Eric","Duncanson","79805954","102140058","CR74073228975331961395", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Marcos","Brumbaugh",49478367,"509660141","CR87203484419447313893",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Marcos","Brumbaugh","49478367","509660141","CR87203484419447313893", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Rene","Laird",63617122,"406400661","CR87223450239523753569",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Rene","Laird","63617122","406400661","CR87223450239523753569", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Joseph","Peters",36593263,"302000837","CR21967587950728075795",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Joseph","Peters","36593263","302000837","CR21967587950728075795", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Janis","Fisher",15001172,"303960380","CR94408899580445030749",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Janis","Fisher","15001172","303960380","CR94408899580445030749", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Ann","Hagen",33211987,"700710230","CR57401578011104453629",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Ann","Hagen","33211987","700710230","CR57401578011104453629", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Stewart","Atkins",26545653,"302800302","CR18262730190534621081",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Stewart","Atkins","26545653","302800302","CR18262730190534621081", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Cathey","Kinney",69343542,"703770948","CR51171102523014066689",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Cathey","Kinney","69343542","703770948","CR51171102523014066689", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Nelson","Long",79569560,"301570183","CR59423123017148684465",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Nelson","Long","79569560","301570183","CR59423123017148684465", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("Thomas","Bond",43754413,"507390508","CR02532868259519632820",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("Thomas","Bond","43754413","507390508","CR02532868259519632820", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("John","Vaughn",14793534,"605620605","CR63094429244441666617",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("John","Vaughn","14793534","605620605","CR63094429244441666617", 0 , "2022-01-01 09:00:00", 0), 256));
+insert into Copero(nombre,apellido,telefono, cedula, cuentaBancaria, totalDinero, fechaUltimoPago, deleted, checkSum) values("David","Cork",81781736,"609970466","CR54655003409038744005",0 ,"2022-01-01 09:00:00" ,0, SHA2(CONCAT("David","Cork","81781736","609970466","CR54655003409038744005", 0 , "2022-01-01 09:00:00", 0), 256));
+
+
 
 insert into Clientes(nombre,apellido,telefono, createdAT) values("Merle","Moser",44211316,"2022-01-01 09:00:00");
 insert into Clientes(nombre,apellido,telefono, createdAT) values("David","Freeders",15276725,"2022-01-01 09:00:00");
@@ -2170,7 +2203,7 @@ insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fec
 insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
 (14,15,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,15,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
 insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
-(15,14,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,15,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+(15,15,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,15,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
 insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
 (16,15,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,15,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
 insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
