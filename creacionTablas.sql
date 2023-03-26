@@ -84,6 +84,29 @@ CREATE TABLE IF NOT EXISTS `Caso2`.`Playas` (
   PRIMARY KEY (`idPlaya`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `Caso2`.`CarritosXplayas`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `Caso2`.`CarritosXplayas` (
+  `idCarritoXplaya` INT UNSIGNED NOT NULL,
+  `idCarrito` SMALLINT(4) UNSIGNED NOT NULL,
+  `idPlaya` SMALLINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idCarritoXplaya`, `idPlaya`, `idCarrito`),
+  INDEX `fk_CarritosXplayas_Carrito1_idx` (`idCarrito` ASC) VISIBLE,
+  INDEX `fk_CarritosXplayas_Playas1_idx` (`idPlaya` ASC) VISIBLE,
+  CONSTRAINT `fk_CarritosXplayas_Carrito1`
+    FOREIGN KEY (`idCarrito`)
+    REFERENCES `Caso2`.`Carrito` (`idCarrito`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CarritosXplayas_Playas1`
+    FOREIGN KEY (`idPlaya`)
+    REFERENCES `Caso2`.`Playas` (`idPlaya`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `Caso2`.`ComisionesLogs`
@@ -421,7 +444,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Caso2`.`PrecioProductoXplaya` ;
 
 CREATE TABLE IF NOT EXISTS `Caso2`.`PrecioProductoXplaya` (
-  `idPrecioProductoXplaya` INT UNSIGNED NOT NULL,
+  `idPrecioProductoXplaya` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `idPlaya` SMALLINT UNSIGNED NOT NULL,
   `idProducto` SMALLINT UNSIGNED NOT NULL,
   `valor` DECIMAL(9,2) NOT NULL,
@@ -444,7 +467,7 @@ CREATE TABLE IF NOT EXISTS `Caso2`.`PrecioProductoXplaya` (
     REFERENCES `Caso2`.`Productos` (`idProducto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -1271,7 +1294,7 @@ insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fec
 insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
 (19,1,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,1,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
 insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
-(20,1,1,'2022-01-01 08:00:00',1.00,0,SHA2(CONCAT(20,1,1,'2022-01-01 08:00:00',1.00,0,"feliz navidad"), 256));
+(20,1,1,'2022-01-01 08:00:00',20.00,0,SHA2(CONCAT(20,1,1,'2022-01-01 08:00:00',20.00,0,"feliz navidad"), 256));
 insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
 (21,1,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,1,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
 insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
@@ -1296,6 +1319,452 @@ insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fec
 (31,1,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,1,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
 # tipoOperacion ==> 0 = Producto Nuevo | 1 = Venta | 2 = Refill | 3 = Producto Caducado
 
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(1,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(1,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(2,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(2,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(3,2,1,'2022-01-01 08:00:00',800.00,0,SHA2(CONCAT(3,2,1,'2022-01-01 08:00:00',800.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(4,2,1,'2022-01-01 08:00:00',397.00,0,SHA2(CONCAT(4,2,1,'2022-01-01 08:00:00',397.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(5,2,1,'2022-01-01 08:00:00',20000.00,0,SHA2(CONCAT(5,2,1,'2022-01-01 08:00:00',20000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(6,2,1,'2022-01-01 08:00:00',5300.00,0,SHA2(CONCAT(6,2,1,'2022-01-01 08:00:00',5300.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(7,2,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(7,2,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(8,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(8,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(9,2,1,'2022-01-01 08:00:00',400.00,0,SHA2(CONCAT(9,2,1,'2022-01-01 08:00:00',400.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(10,2,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(10,2,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(11,2,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(11,2,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(12,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(12,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(13,2,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(13,2,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(14,2,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,2,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(15,2,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,2,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(16,2,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,2,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(17,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(17,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(18,2,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(18,2,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(19,2,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,2,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(20,2,1,'2022-01-01 08:00:00',20.00,0,SHA2(CONCAT(20,2,1,'2022-01-01 08:00:00',20.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(21,2,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,2,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(22,2,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(22,2,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(23,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(23,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(24,2,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(24,2,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(25,2,1,'2022-01-01 08:00:00',970.00,0,SHA2(CONCAT(25,2,1,'2022-01-01 08:00:00',970.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(26,2,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(26,2,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(27,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(27,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(28,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(28,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(29,2,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(29,2,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(30,2,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,2,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(31,2,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,2,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+# tipoOperacion ==> 0 = Producto Nuevo | 1 = Venta | 2 = Refill | 3 = Producto Caducado
+
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(1,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(1,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(2,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(2,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(3,3,1,'2022-01-01 08:00:00',800.00,0,SHA2(CONCAT(3,3,1,'2022-01-01 08:00:00',800.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(4,3,1,'2022-01-01 08:00:00',397.00,0,SHA2(CONCAT(4,3,1,'2022-01-01 08:00:00',397.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(5,3,1,'2022-01-01 08:00:00',20000.00,0,SHA2(CONCAT(5,3,1,'2022-01-01 08:00:00',20000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(6,3,1,'2022-01-01 08:00:00',5300.00,0,SHA2(CONCAT(6,3,1,'2022-01-01 08:00:00',5300.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(7,3,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(7,3,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(8,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(8,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(9,3,1,'2022-01-01 08:00:00',400.00,0,SHA2(CONCAT(9,3,1,'2022-01-01 08:00:00',400.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(10,3,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(10,3,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(11,3,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(11,3,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(12,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(12,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(13,3,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(13,3,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(14,3,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,3,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(15,3,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,3,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(16,3,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,3,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(17,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(17,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(18,3,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(18,3,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(19,3,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,3,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(20,3,1,'2022-01-01 08:00:00',20.00,0,SHA2(CONCAT(20,3,1,'2022-01-01 08:00:00',20.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(21,3,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,3,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(22,3,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(22,3,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(23,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(23,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(24,3,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(24,3,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(25,3,1,'2022-01-01 08:00:00',970.00,0,SHA2(CONCAT(25,3,1,'2022-01-01 08:00:00',970.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(26,3,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(26,3,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(27,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(27,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(28,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(28,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(29,3,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(29,3,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(30,3,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,3,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(31,3,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,3,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+# tipoOperacion ==> 0 = Producto Nuevo | 1 = Venta | 2 = Refill | 3 = Producto Caducado
+
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(1,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(1,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(2,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(2,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(3,4,1,'2022-01-01 08:00:00',800.00,0,SHA2(CONCAT(3,4,1,'2022-01-01 08:00:00',800.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(4,4,1,'2022-01-01 08:00:00',397.00,0,SHA2(CONCAT(4,4,1,'2022-01-01 08:00:00',397.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(5,4,1,'2022-01-01 08:00:00',20000.00,0,SHA2(CONCAT(5,4,1,'2022-01-01 08:00:00',20000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(6,4,1,'2022-01-01 08:00:00',5300.00,0,SHA2(CONCAT(6,4,1,'2022-01-01 08:00:00',5300.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(7,4,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(7,4,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(8,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(8,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(9,4,1,'2022-01-01 08:00:00',400.00,0,SHA2(CONCAT(9,4,1,'2022-01-01 08:00:00',400.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(10,4,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(10,4,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(11,4,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(11,4,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(12,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(12,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(13,4,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(13,4,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(14,4,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,4,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(15,4,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,4,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(16,4,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,4,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(17,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(17,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(18,4,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(18,4,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(19,4,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,4,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(20,4,1,'2022-01-01 08:00:00',20.00,0,SHA2(CONCAT(20,4,1,'2022-01-01 08:00:00',20.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(21,4,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,4,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(22,4,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(22,4,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(23,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(23,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(24,4,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(24,4,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(25,4,1,'2022-01-01 08:00:00',970.00,0,SHA2(CONCAT(25,4,1,'2022-01-01 08:00:00',970.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(26,4,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(26,4,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(27,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(27,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(28,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(28,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(29,4,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(29,4,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(30,4,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,4,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(31,4,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,4,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(1,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(1,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(2,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(2,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(3,5,1,'2022-01-01 08:00:00',800.00,0,SHA2(CONCAT(3,5,1,'2022-01-01 08:00:00',800.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(4,5,1,'2022-01-01 08:00:00',397.00,0,SHA2(CONCAT(4,5,1,'2022-01-01 08:00:00',397.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(5,5,1,'2022-01-01 08:00:00',20000.00,0,SHA2(CONCAT(5,5,1,'2022-01-01 08:00:00',20000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(6,5,1,'2022-01-01 08:00:00',5300.00,0,SHA2(CONCAT(6,5,1,'2022-01-01 08:00:00',5300.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(7,5,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(7,5,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(8,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(8,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(9,5,1,'2022-01-01 08:00:00',400.00,0,SHA2(CONCAT(9,5,1,'2022-01-01 08:00:00',400.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(10,5,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(10,5,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(11,5,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(11,5,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(12,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(12,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(13,5,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(13,5,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(14,5,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,5,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(15,5,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,5,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(16,5,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,5,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(17,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(17,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(18,5,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(18,5,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(19,5,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,5,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(20,5,1,'2022-01-01 08:00:00',20.00,0,SHA2(CONCAT(20,5,1,'2022-01-01 08:00:00',20.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(21,5,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,5,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(22,5,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(22,5,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(23,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(23,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(24,5,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(24,5,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(25,5,1,'2022-01-01 08:00:00',970.00,0,SHA2(CONCAT(25,5,1,'2022-01-01 08:00:00',970.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(26,5,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(26,5,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(27,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(27,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(28,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(28,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(29,5,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(29,5,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(30,5,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,5,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(31,5,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,5,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(1,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(1,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(2,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(2,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(3,6,1,'2022-01-01 08:00:00',800.00,0,SHA2(CONCAT(3,6,1,'2022-01-01 08:00:00',800.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(4,6,1,'2022-01-01 08:00:00',397.00,0,SHA2(CONCAT(4,6,1,'2022-01-01 08:00:00',397.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(5,6,1,'2022-01-01 08:00:00',20000.00,0,SHA2(CONCAT(5,6,1,'2022-01-01 08:00:00',20000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(6,6,1,'2022-01-01 08:00:00',5300.00,0,SHA2(CONCAT(6,6,1,'2022-01-01 08:00:00',5300.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(7,6,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(7,6,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(8,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(8,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(9,6,1,'2022-01-01 08:00:00',400.00,0,SHA2(CONCAT(9,6,1,'2022-01-01 08:00:00',400.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(10,6,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(10,6,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(11,6,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(11,6,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(12,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(12,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(13,6,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(13,6,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(14,6,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,6,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(15,6,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,6,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(16,6,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,6,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(17,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(17,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(18,6,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(18,6,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(19,6,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,6,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(20,6,1,'2022-01-01 08:00:00',20.00,0,SHA2(CONCAT(20,6,1,'2022-01-01 08:00:00',20.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(21,6,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,6,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(22,6,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(22,6,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(23,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(23,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(24,6,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(24,6,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(25,6,1,'2022-01-01 08:00:00',970.00,0,SHA2(CONCAT(25,6,1,'2022-01-01 08:00:00',970.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(26,6,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(26,6,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(27,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(27,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(28,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(28,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(29,6,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(29,6,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(30,6,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,6,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(31,6,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,6,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(1,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(1,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(2,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(2,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(3,7,1,'2022-01-01 08:00:00',800.00,0,SHA2(CONCAT(3,7,1,'2022-01-01 08:00:00',800.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(4,7,1,'2022-01-01 08:00:00',397.00,0,SHA2(CONCAT(4,7,1,'2022-01-01 08:00:00',397.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(5,7,1,'2022-01-01 08:00:00',20000.00,0,SHA2(CONCAT(5,7,1,'2022-01-01 08:00:00',20000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(6,7,1,'2022-01-01 08:00:00',5300.00,0,SHA2(CONCAT(6,7,1,'2022-01-01 08:00:00',5300.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(7,7,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(7,7,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(8,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(8,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(9,7,1,'2022-01-01 08:00:00',400.00,0,SHA2(CONCAT(9,7,1,'2022-01-01 08:00:00',400.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(10,7,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(10,7,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(11,7,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(11,7,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(12,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(12,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(13,7,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(13,7,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(14,7,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,7,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(15,7,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,7,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(16,7,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,7,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(17,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(17,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(18,7,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(18,7,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(19,7,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,7,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(20,7,1,'2022-01-01 08:00:00',20.00,0,SHA2(CONCAT(20,7,1,'2022-01-01 08:00:00',20.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(21,7,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,7,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(22,7,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(22,7,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(23,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(23,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(24,7,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(24,7,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(25,7,1,'2022-01-01 08:00:00',970.00,0,SHA2(CONCAT(25,7,1,'2022-01-01 08:00:00',970.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(26,7,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(26,7,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(27,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(27,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(28,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(28,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(29,7,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(29,7,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(30,7,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,7,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(31,7,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,7,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(1,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(1,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(2,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(2,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(3,8,1,'2022-01-01 08:00:00',800.00,0,SHA2(CONCAT(3,8,1,'2022-01-01 08:00:00',800.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(4,8,1,'2022-01-01 08:00:00',397.00,0,SHA2(CONCAT(4,8,1,'2022-01-01 08:00:00',397.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(5,8,1,'2022-01-01 08:00:00',20000.00,0,SHA2(CONCAT(5,8,1,'2022-01-01 08:00:00',20000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(6,8,1,'2022-01-01 08:00:00',5300.00,0,SHA2(CONCAT(6,8,1,'2022-01-01 08:00:00',5300.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(7,8,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(7,8,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(8,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(8,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(9,8,1,'2022-01-01 08:00:00',400.00,0,SHA2(CONCAT(9,8,1,'2022-01-01 08:00:00',400.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(10,8,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(10,8,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(11,8,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(11,8,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(12,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(12,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(13,8,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(13,8,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(14,8,1,'2022-01-01 08:00:00',1890.00,0,SHA2(CONCAT(14,8,1,'2022-01-01 08:00:00',1890.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(15,8,1,'2022-01-01 08:00:00',2200.00,0,SHA2(CONCAT(15,8,1,'2022-01-01 08:00:00',2200.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(16,8,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(16,8,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(17,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(17,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(18,8,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(18,8,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(19,8,1,'2022-01-01 08:00:00',100.00,0,SHA2(CONCAT(19,8,1,'2022-01-01 08:00:00',100.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(20,8,1,'2022-01-01 08:00:00',20.00,0,SHA2(CONCAT(20,8,1,'2022-01-01 08:00:00',20.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(21,8,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(21,8,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(22,8,1,'2022-01-01 08:00:00',500.00,0,SHA2(CONCAT(22,8,1,'2022-01-01 08:00:00',500.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(23,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(23,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(24,8,1,'2022-01-01 08:00:00',750.00,0,SHA2(CONCAT(24,8,1,'2022-01-01 08:00:00',750.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(25,8,1,'2022-01-01 08:00:00',970.00,0,SHA2(CONCAT(25,8,1,'2022-01-01 08:00:00',970.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(26,8,1,'2022-01-01 08:00:00',2000.00,0,SHA2(CONCAT(26,8,1,'2022-01-01 08:00:00',2000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(27,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(27,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(28,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(28,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(29,8,1,'2022-01-01 08:00:00',350.00,0,SHA2(CONCAT(29,8,1,'2022-01-01 08:00:00',350.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(30,8,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,8,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
+insert into inventariocarrito(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
+(31,8,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,8,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
+
+
+select idCarrito, Ingredientes.idingrediente, nombre, cantidad from Ingredientes
+INNER JOIN inventarioCarrito ON inventarioCarrito.idingrediente = Ingredientes.idingrediente;
 
 INSERT INTO EstadoSolicitud(estado)VALUES
 ("Aceptado"),
@@ -1306,13 +1775,22 @@ INSERT INTO EstadoSolicitud(estado)VALUES
 
 
 
+
 INSERT INTO PrecioProductoXplaya(valor, fechaInicio, active, createdAT, updatedAT, checkSum, idProducto, idPlaya)
 VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
 		SHA2(CONCAT(2500.00,@fechaInicial,1,@fechaInicial,9), 256),
 		9,3);
-delete from PrecioProductoXplaya where idPrecioProductoXplaya
+
 
 SELECT Productos.idProducto,nombre,valor FROM Productos
 INNER JOIN LogPrecios ON Productos.idProducto = LogPrecios.idProducto
 ORDER BY valor DESC;
 
+
+CREATE VIEW obtieneReceta AS
+SELECT prod.idProducto id, prod.nombre Producto, ing.nombre Ingrediente, ingXprod.cantidad, um.nombre UnidadMedida  FROM Productos prod
+INNER JOIN IngredientesXproductos ingXprod ON ingXprod.idProducto = prod.idProducto
+INNER JOIN Ingredientes ing ON ingXprod.idIngrediente = ing.idIngrediente
+INNER JOIN UnidadesMedida um ON um.idUnidadeMedida = ing.idUnidadeMedida;
+
+#select * from obtieneReceta WHERE id = 9;
