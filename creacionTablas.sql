@@ -2288,18 +2288,6 @@ INNER JOIN UnidadesMedida um ON um.idUnidadeMedida = ing.idUnidadeMedida;
 #select DATE_ADD(@fecha_inicial, INTERVAL 1 DAY);
 #CALL generaFechasEnRango(@fecha_inicial,@fecha_final);
 
-DROP PROCEDURE IF EXISTS generaFechasEnRango;
-DELIMITER $$
 
-CREATE PROCEDURE generaFechasEnRango(IN fecha1 DATE, IN fecha2 DATE)
-BEGIN
-	DECLARE fechaIt DATE DEFAULT fecha1;
-	WHILE fechaIt <= fecha2 DO
-	SET fechaIt = DATE_ADD(fechaIt, INTERVAL 1 DAY);
-	SELECT fechaIt AS Fecha;
-
-	END WHILE;
-END$$
-DELIMITER ;
 SELECT (FLOOR((FLOOR(RAND() * 5) + 1)*1000)+1000) AS NUM;
 
