@@ -66,7 +66,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Caso2`.`Carrito` ;
 
 CREATE TABLE IF NOT EXISTS `Caso2`.`Carrito` (
-  `idCarrito` SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idCarrito` INT  NOT NULL AUTO_INCREMENT,
   `color` VARCHAR(10) NOT NULL,
   `enabled` BIT NOT NULL,
   PRIMARY KEY (`idCarrito`))
@@ -89,7 +89,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `Caso2`.`CarritosXplayas` (
-  `idCarrito` SMALLINT(4) UNSIGNED NOT NULL,
+  `idCarrito` INT NOT NULL,
   `idPlaya` SMALLINT UNSIGNED NOT NULL,
   PRIMARY KEY (`idPlaya`, `idCarrito`),
   INDEX `fk_CarritosXplayas_Carrito1_idx` (`idCarrito` ASC) VISIBLE,
@@ -136,9 +136,9 @@ CREATE TABLE IF NOT EXISTS `Caso2`.`Ventas` (
   `descripcion` VARCHAR(500) NULL,
   `idCopero` INT UNSIGNED NOT NULL,
   `deleted` BIT NOT NULL,
-  `checkSum` VARBINARY(150) NOT NULL,
-  `pago` DECIMAL(10,2) NOT NULL,
-  `vuelto` DECIMAL(10,2) NOT NULL,
+  `checkSum` VARBINARY(150) NULL,
+  `pago` DECIMAL(10,2) NULL,
+  `vuelto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idVenta`, `idPlaya`, `idComisionLog`, `idCopero`),
   INDEX `fk_Ventas_Playas1_idx` (`idPlaya` ASC) VISIBLE,
   INDEX `fk_Ventas_Comisiones1_idx` (`idComisionLog` ASC) VISIBLE,
@@ -218,7 +218,7 @@ DROP TABLE IF EXISTS `Caso2`.`Reportes` ;
 CREATE TABLE IF NOT EXISTS `Caso2`.`Reportes` (
   `idReporte` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `idCopero` INT UNSIGNED NOT NULL,
-  `idCarrito` SMALLINT(4) UNSIGNED NOT NULL,
+  `idCarrito` INT NOT NULL,
   `idTurno` SMALLINT UNSIGNED NOT NULL,
   `fecha` DATE NOT NULL,
   `checkSum` VARBINARY(150) NOT NULL,
@@ -288,9 +288,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Caso2`.`InventarioCarritoLog` ;
 
 CREATE TABLE IF NOT EXISTS `Caso2`.`InventarioCarritoLog` (
-  `idInventarioCarritoLog` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idInventarioCarritoLog` INT NOT NULL AUTO_INCREMENT,
   `idIngrediente` INT UNSIGNED NOT NULL,
-  `idCarrito` SMALLINT(4) UNSIGNED NOT NULL,
+  `idCarrito` INT NOT NULL,
   `fecha` DATETIME NOT NULL DEFAULT NOW(),
   `checkSum` VARBINARY(150) NOT NULL,
   `cantidad` DECIMAL(10,4) NOT NULL,
@@ -476,7 +476,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Caso2`.`ReportesXcajas` ;
 
 CREATE TABLE IF NOT EXISTS `Caso2`.`ReportesXcajas` (
-  `idCajaDineroLog` INT UNSIGNED NOT NULL,
+  `idCajaDineroLog` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `idReporte` INT UNSIGNED NOT NULL,
   `idCoperoEntrega` INT UNSIGNED NOT NULL,
   `isAgree` BIT NOT NULL,
@@ -2237,18 +2237,10 @@ insert into inventariocarritolog(idIngrediente, idCarrito, idCoperoResponsable, 
 (30,15,1,'2022-01-01 08:00:00',250.00,0,SHA2(CONCAT(30,15,1,'2022-01-01 08:00:00',250.00,0,"feliz navidad"), 256));
 insert into inventariocarritolog(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
 (31,15,1,'2022-01-01 08:00:00',1000.00,0,SHA2(CONCAT(31,15,1,'2022-01-01 08:00:00',1000.00,0,"feliz navidad"), 256));
-select * from inventariocarritolog;
+
 #insert into inventariocarritolog(idIngrediente, idCarrito, idCoperoResponsable, fecha, cantidad, tipoOperacion,checkSum) values
 #(22,15,15,'2022-01-02 08:00:00',-15.00,1,SHA2(CONCAT(31,15,1,'2022-01-02 08:00:00',-15.00,1,"feliz navidad"), 256));
-select cantidad from inventariocarritolog
-where idInventarioCarritoLog = idIngrediente;
-select SUM(cantidad) from inventariocarritolog
-where idCarrito = 15 AND
-	  idIngrediente=22 AND
-      fecha BETWEEN '2022-01-01 08:00:00' AND '2022-01-02 08:00:00';
 
-select idCarrito, Ingredientes.idingrediente, nombre, cantidad from Ingredientes
-INNER JOIN inventarioCarritolog ON inventarioCarritolog.idingrediente = Ingredientes.idingrediente;
 
 INSERT INTO EstadoSolicitud(estado)VALUES
 ("Aceptado"),
@@ -2266,16 +2258,8 @@ VALUES(2500.00,@fechaInicial,1,@fechaInicial, @fechaInicial,
 		9,3);
 
 
-SELECT Productos.idProducto,nombre,valor FROM Productos
-INNER JOIN LogPrecios ON Productos.idProducto = LogPrecios.idProducto
-ORDER BY valor DESC;
 
-DROP VIEW IF EXISTS obtieneReceta;
-CREATE VIEW obtieneReceta AS
-SELECT prod.idProducto idProducto, prod.nombre Producto, ing.idIngrediente, ing.nombre Ingrediente, ingXprod.cantidad, um.nombre UnidadMedida  FROM Productos prod
-INNER JOIN IngredientesXproductos ingXprod ON ingXprod.idProducto = prod.idProducto
-INNER JOIN Ingredientes ing ON ingXprod.idIngrediente = ing.idIngrediente
-INNER JOIN UnidadesMedida um ON um.idUnidadeMedida = ing.idUnidadeMedida;
+
 
 #select * from obtieneReceta WHERE idProducto = 9;
 
@@ -2289,5 +2273,5 @@ INNER JOIN UnidadesMedida um ON um.idUnidadeMedida = ing.idUnidadeMedida;
 #CALL generaFechasEnRango(@fecha_inicial,@fecha_final);
 
 
-SELECT (FLOOR((FLOOR(RAND() * 5) + 1)*1000)+1000) AS NUM;
+#SELECT (FLOOR((FLOOR(RAND() * 5) + 1)*1000)+1000) AS NUM;
 

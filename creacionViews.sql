@@ -1,4 +1,5 @@
 -- vistas
+USE Caso2;
 /*
 DROP VIEW IF EXISTS spNombreProcedure;
 
@@ -17,13 +18,12 @@ INNER JOIN UnidadesMedida um ON um.idUnidadeMedida = ing.idUnidadeMedida;
 
 #select * from obtieneReceta WHERE idProducto = 9;
 
-DROP view PreciosProductos;
+DROP view IF EXISTS PreciosProductos;
 CREATE VIEW PreciosProductos AS
 SELECT valor as precio , productos.idProducto AS idproducto
 FROM logprecios INNER JOIN productos ON productos.idProducto = logprecios.idProducto
 WHERE logprecios.active = 1;
 
-select precio from PreciosProductos where idproducto = 9 ;
 
 DROP view if exists PreciosProductosPlaya;
 CREATE VIEW PreciosProductosPlaya AS
@@ -31,4 +31,8 @@ SELECT valor as precio , productos.idProducto AS idproducto, idPlaya
 FROM precioproductoxplaya INNER JOIN productos ON productos.idProducto = precioproductoxplaya.idProducto 
 WHERE precioproductoxplaya.active = 1 ;
 
-SELECT coalesce((select precio from PreciosProductosPlaya where idproducto = 9 AND idPlaya = 2), (select precio from PreciosProductos where idproducto = 9 )) Precio ;
+
+DROP VIEW IF EXISTS ObtieneProductosVenta;
+
+CREATE VIEW ObtieneProductosVenta AS
+SELECT idProducto, cantidad, idventa FROM ProductosXventas;
